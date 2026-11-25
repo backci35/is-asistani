@@ -9,8 +9,8 @@
 <meta name="apple-mobile-web-app-title" content="İş Asistanım">
 <title>İş Asistanım</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/favicon.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{color-scheme:dark;--bg:#0f1419;--card:#1a2230;--line:#2a3547;--tx:#e8edf5;--mut:#8a97ab;--ac:#4fd1a5;--y:#ff6b6b;--o:#ffb454;--d:#6cb6ff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -62,7 +62,7 @@ label{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px}
 </head>
 <body>
 <header>
-<div class="top"><img src="icons/icon-192.png" alt=""><div><div class="hi" id="hi"></div><div class="dt" id="dt"></div></div></div>
+<div class="top"><img src="icon-192.png" alt=""><div><div class="hi" id="hi"></div><div class="dt" id="dt"></div></div></div>
 <div class="tabs"><button id="tIs" class="on">İş</button><button id="tKi">Kişisel</button></div>
 </header>
 <main id="main"></main>
@@ -157,7 +157,7 @@ function render(){
  $("#cats").innerHTML=Array.from(new Set(S.tasks.map(function(t){return t.cat}).filter(Boolean))).map(function(c){return'<option value="'+esc(c)+'">'}).join("")}
 function notify(title,body,tag){
  if(!S.set.notif||!("Notification" in window)||Notification.permission!=="granted")return;
- var o={body:body,tag:tag,icon:"icons/icon-192.png",badge:"icons/icon-192.png",vibrate:[100,50,100]};
+ var o={body:body,tag:tag,icon:"icon-192.png",badge:"icon-192.png",vibrate:[100,50,100]};
  function fb(){try{new Notification(title,o)}catch(e){}}
  if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(function(r){r?r.showNotification(title,o):fb()},fb);else fb()}
 function tick(){

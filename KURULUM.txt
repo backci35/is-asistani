@@ -3,7 +3,7 @@
 1) github.com'da hesap aç (varsa giriş yap).
 2) Yeni depo (repository) oluştur: adı "is-asistani", Public seç.
 3) "Add file > Upload files" ile bu klasördeki her şeyi yükle:
-   index.html, sw.js, manifest.webmanifest ve icons klasörü (klasörü sürükle).
+   TÜM dosyaları (klasör yok, hepsi aynı düzeyde): index.html, sw.js, manifest.webmanifest ve 5 adet .png dosyası.
    "Commit changes" de.
 4) Depoda Settings > Pages > Source: "Deploy from a branch" > Branch: main, / (root) > Save.
 5) 1-2 dakika sonra adresin hazır olur:
