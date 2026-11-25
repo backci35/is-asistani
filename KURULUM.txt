@@ -1,0 +1,18 @@
+İŞ ASİSTANIM - KURULUM (GitHub Pages, ücretsiz)
+
+1) github.com'da hesap aç (varsa giriş yap).
+2) Yeni depo (repository) oluştur: adı "is-asistani", Public seç.
+3) "Add file > Upload files" ile bu klasördeki her şeyi yükle:
+   index.html, sw.js, manifest.webmanifest ve icons klasörü (klasörü sürükle).
+   "Commit changes" de.
+4) Depoda Settings > Pages > Source: "Deploy from a branch" > Branch: main, / (root) > Save.
+5) 1-2 dakika sonra adresin hazır olur:
+   https://KULLANICIADIN.github.io/is-asistani/
+6) Bu adresi telefonda Chrome ile aç. Menüden "Uygulamayı yükle"
+   (veya "Ana ekrana ekle") de. Logolu uygulama olarak kurulur.
+7) Uygulamada Ayarlar > "Kaydet ve izin iste" ile bildirim iznini ver.
+
+NOT: Veriler telefonda saklanır. Yedek almak için Ayarlar > "Yedeği indir".
+Güncelleme yapmak istersen dosyaları aynı şekilde tekrar yükle.
+
+GÜNCELLEME: Yeni dosyaları aynı adlarla yükleyip uygulamayı iki kez aç/kapat; yeni sürüm yüklenir.
