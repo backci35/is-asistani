@@ -16,3 +16,7 @@ NOT: Veriler telefonda saklanır. Yedek almak için Ayarlar > "Yedeği indir".
 Güncelleme yapmak istersen dosyaları aynı şekilde tekrar yükle.
 
 GÜNCELLEME: Yeni dosyaları aynı adlarla yükleyip uygulamayı iki kez aç/kapat; yeni sürüm yüklenir.
+
+YENİ ÖZELLİKLER: Sesle iş ekleme (🎙), İş+Kişisel tek takvim (📅), akıllı bildirimler (tamamla/ertele düğmesi, sessiz saatler). Güncellemek için 3 dosyayı (index.html, sw.js) aynı adla yükle.
+
+KAPALIYKEN BİLDİRİM: Ayrı pakette (is-asistani-push-sunucu.zip) Cloudflare sunucusu ve KURULUM-SUNUCU.txt var. GitHub'a index.html ve sw.js'yi yeniden yükle.
