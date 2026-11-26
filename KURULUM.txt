@@ -20,3 +20,5 @@ GÜNCELLEME: Yeni dosyaları aynı adlarla yükleyip uygulamayı iki kez aç/kap
 YENİ ÖZELLİKLER: Sesle iş ekleme (🎙), İş+Kişisel tek takvim (📅), akıllı bildirimler (tamamla/ertele düğmesi, sessiz saatler). Güncellemek için 3 dosyayı (index.html, sw.js) aynı adla yükle.
 
 KAPALIYKEN BİLDİRİM: Ayrı pakette (is-asistani-push-sunucu.zip) Cloudflare sunucusu ve KURULUM-SUNUCU.txt var. GitHub'a index.html ve sw.js'yi yeniden yükle.
+
+SON GÜNCELLEME: 'Süresi gelince de bildir', bildirim sesi ve titreşim seçimi eklendi. index.html ve sw.js dosyalarını yeniden yükle. Cloudflare sunucusunda değişiklik gerekmez.

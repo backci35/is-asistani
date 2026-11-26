@@ -1,4 +1,4 @@
-var CACHE = "is-asistani-v4";
+var CACHE = "is-asistani-v5";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", function (e) {
@@ -51,13 +51,21 @@ function getCfg() {
 self.addEventListener("push", function (e) {
   e.waitUntil((async function () {
     var shown = 0, cfg = await getCfg();
+    var wins = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    var vis = wins.filter(function (c) { return c.visibilityState === "visible"; });
+    function base(o) {
+      o.icon = "icon-192.png"; o.badge = "icon-192.png";
+      if (vis.length) { o.silent = true; }
+      else { o.renotify = true; o.vibrate = (cfg && cfg.vib) ? cfg.vib : [100, 50, 100]; }
+      return o;
+    }
     if (cfg) {
       try {
         var r = await fetch(cfg.url.replace(/\/+$/, "") + "/api/outbox", { headers: { "x-token": cfg.token } });
         var data = await r.json(), items = data.items || [];
         for (var i = 0; i < items.length; i++) {
           var m = items[i];
-          var o = { body: m.body || "", tag: m.tag || m.id, icon: "icon-192.png", badge: "icon-192.png", vibrate: [100, 50, 100], renotify: true };
+          var o = base({ body: m.body || "", tag: m.tag || m.id });
           if (m.tid) o.data = { id: m.tid };
           if (m.act) o.actions = [{ action: "done", title: "✓ Tamamla" }, { action: "snooze", title: "⏰ Ertele" }];
           if (m.urg) o.requireInteraction = true;
@@ -67,7 +75,8 @@ self.addEventListener("push", function (e) {
       } catch (err) {}
     }
     if (!shown) {
-      await self.registration.showNotification("İş Asistanım", { body: "Yeni bir hatırlatman var", icon: "icon-192.png", badge: "icon-192.png", tag: "genel" });
+      await self.registration.showNotification("İş Asistanım", base({ body: "Yeni bir hatırlatman var", tag: "genel" }));
     }
+    vis.forEach(function (c) { c.postMessage({ snd: 1 }); });
   })());
 });
