@@ -1,8 +1,11 @@
-var CACHE = "is-asistani-v5";
-var FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
+var CACHE = "is-asistani-v6";
+var FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png", "favicon.png"];
 
 self.addEventListener("install", function (e) {
-  e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
+  e.waitUntil(caches.open(CACHE).then(function (c) {
+    // Bir dosya eksik olsa bile kurulum bozulmasın
+    return Promise.all(FILES.map(function (f) { return c.add(f).catch(function () {}); }));
+  }).then(function () { return self.skipWaiting(); }));
 });
 
 self.addEventListener("activate", function (e) {
@@ -13,17 +16,35 @@ self.addEventListener("activate", function (e) {
   );
 });
 
+// Sayfa (HTML): önce internet (3 sn), olmazsa önbellek -> güncellemeler ilk açılışta gelir
+function navResponse(req) {
+  return new Promise(function (resolve) {
+    var done = false;
+    function fin(r) { if (!done && r) { done = true; resolve(r); } }
+    var tm = setTimeout(function () { caches.match("index.html").then(fin); }, 3000);
+    fetch(req).then(function (res) {
+      clearTimeout(tm);
+      if (res && res.ok) { var cp = res.clone(); caches.open(CACHE).then(function (c) { c.put("index.html", cp); }); }
+      fin(res);
+    }).catch(function () {
+      clearTimeout(tm);
+      caches.match("index.html").then(function (h) { fin(h || Response.error()); });
+    });
+  });
+}
+
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET" || new URL(e.request.url).origin !== location.origin) return;
-  e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
-      var net = fetch(e.request).then(function (res) {
-        if (res && res.ok) { var copy = res.clone(); caches.open(CACHE).then(function (c) { c.put(e.request, copy); }); }
-        return res;
-      }).catch(function () { return hit; });
-      return hit || net;
-    })
-  );
+  if (e.request.mode === "navigate") { e.respondWith(navResponse(e.request)); return; }
+  // Diğer dosyalar: önbellekten hızlı ver, arka planda yenile
+  var net = fetch(e.request).then(function (res) {
+    if (res && res.ok) { var copy = res.clone(); return caches.open(CACHE).then(function (c) { return c.put(e.request, copy); }).then(function () { return res; }); }
+    return res;
+  });
+  e.respondWith(caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
+    return hit || net;
+  }).catch(function () { return net; }));
+  e.waitUntil(net.catch(function () {}));
 });
 
 self.addEventListener("notificationclick", function (e) {

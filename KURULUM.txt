@@ -21,4 +21,14 @@ YENİ ÖZELLİKLER: Sesle iş ekleme (🎙), İş+Kişisel tek takvim (📅), ak
 
 KAPALIYKEN BİLDİRİM: Ayrı pakette (is-asistani-push-sunucu.zip) Cloudflare sunucusu ve KURULUM-SUNUCU.txt var. GitHub'a index.html ve sw.js'yi yeniden yükle.
 
-SON GÜNCELLEME: 'Süresi gelince de bildir', bildirim sesi ve titreşim seçimi eklendi. index.html ve sw.js dosyalarını yeniden yükle. Cloudflare sunucusunda değişiklik gerekmez.
+SÜRÜM 6 (index.html ve sw.js'yi yeniden yükle; sunucuda değişiklik gerekmez):
+ - İşe dokununca düzenleme ekranı açılır (başlık, tarih, saat, not...).
+ - Tekrarlayan işler: her gün / hafta içi / her hafta / her ay. Tamamlayınca bir sonraki kendiliğinden oluşur.
+ - Not alanı, İşler sekmesinde arama, Bugün ekranında "Tarihsiz" bölümü.
+ - Hızlı ekle kutusu artık "yarın 14:00 toplantı" gibi yazılanları anlıyor.
+ - Tamamlayınca "Geri al" çıkıyor. Android geri tuşu formu kapatıyor.
+ - 30 günde bir yedek hatırlatması. Yedekten dönünce sunucu bağlantısı kopmuyor.
+ - Güncellemeler artık ilk açılışta geliyor (iki kez aç/kapat gerekmez).
+ Ayarlar ekranının altında "sürüm 6" yazıyorsa güncelleme yüklenmiştir.
+
+ÖNCEKİ GÜNCELLEME: 'Süresi gelince de bildir', bildirim sesi ve titreşim seçimi eklendi. index.html ve sw.js dosyalarını yeniden yükle. Cloudflare sunucusunda değişiklik gerekmez.
